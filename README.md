@@ -3,7 +3,7 @@ Framework for estimating the structures and parameters of Bayesian networks (DAG
 
 Developed by Dr. Ben Lengerich (MIT) and Caleb Ellington (CMU)
 
-## Install and Use the NOTMAD Module
+## Install and Use NOTMAD
 Please navigate to the root of this repository, and run the following command to install the `notmad` module.
 ```
 pip install -e .
