@@ -12,7 +12,6 @@ from sklearn.decomposition import PCA
 import dataloader
 from notmad.helpers import utils
 from notmad.helpers import graph_utils
-utils.set_random_seed(1)
 
 from notears import NOTEARS
 from clustered_notears import ClusteredNOTEARS
@@ -74,8 +73,7 @@ def fit_notmad(sample_specific_loss_params, archetype_loss_params,
 #     init_mat = np.array([graph_utils.project_to_dag(mat)[0] for mat in init_mat])
 #     init_mat = base_predictor.get_ws()
     make_notmad = lambda: NOTMAD(
-        C_train.shape, X_train.shape,
-        k, X_train.shape[-1], 
+        C_train.shape, X_train.shape, k,
         sample_specific_loss_params, archetype_loss_params,
         n_encoder_layers=1, encoder_width=32,
         activation='linear', init_mat=init_mat,

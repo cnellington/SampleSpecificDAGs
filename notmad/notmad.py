@@ -214,11 +214,11 @@ class Explainer(tf.keras.layers.Layer):
 
 
 class NOTMAD: # TODO: Only difference between low-rank and full-rank version should be the Explainer.
-    def __init__(self, context_shape, data_shape, n_archetypes, rank,
+    def __init__(self, context_shape, data_shape, n_archetypes,
                  sample_specific_loss_params, archetype_loss_params,
                  n_encoder_layers=1, encoder_width=16,
                  context_activity_regularizer=tf.keras.regularizers.l1(1e-3),
-                 activation='relu',
+                 activation='relu', rank=None,
                  init_mat=None, init_archs=None, freeze_archs=False,
                  learning_rate=1e-3, project_archs_to_dag=True,
                  project_distance=0.1,
@@ -234,6 +234,8 @@ class NOTMAD: # TODO: Only difference between low-rank and full-rank version sho
         super(NOTMAD, self).__init__()
         encoder_input_shape = (context_shape[1], 1)
         encoder_output_shape = (n_archetypes, )
+        if rank is None:
+            rank = data_shape[-1]
         dict_shape = (n_archetypes, data_shape[-1], rank)
         self.use_compatibility = use_compatibility
         self.update_compat_by_grad = update_compat_by_grad
