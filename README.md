@@ -12,7 +12,7 @@ Then in your code use
 ```
 from notmad.notmad import NOTMAD
 ```
-Load your Context data (C) and Target data (X), specify hyperparameters, and train the model
+Load your Context data `C` and Target data `X`, specify hyperparameters, and train the model
 ```
 sample_specific_loss_params = {'l1': 0., 'alpha': 2e1, 'rho': 1e0}
 archetype_loss_params = {'l1': 0., 'alpha': 1e-1, 'rho': 1e-2}
