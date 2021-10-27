@@ -14,8 +14,10 @@ from notmad.notmad import NOTMAD
 ```
 Load your Context data `C` and Target data `X`, specify hyperparameters, and train the model
 ```
+C, X = your_data()
 sample_specific_loss_params = {'l1': 0., 'alpha': 2e1, 'rho': 1e0}
 archetype_loss_params = {'l1': 0., 'alpha': 1e-1, 'rho': 1e-2}
+
 model = NOTMAD(C.shape, X.shape, k_archetypes, rank, sample_specific_loss_params, archetype_loss_params)
 model.fit(C, X, batch_size=1, epochs=50)
 ```
