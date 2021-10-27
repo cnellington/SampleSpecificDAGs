@@ -9,7 +9,7 @@ setup(name='notmad',
       install_requires=[
           'tensorflow>=2.4.0',
           'tensorflow-addons',
-          'numpy',
+          'numpy>=1.19.2',
           'tqdm',
           'scikit-learn',
           'python-igraph',
