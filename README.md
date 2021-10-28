@@ -7,7 +7,7 @@ Developed by Dr. Ben Lengerich (MIT) and Caleb Ellington (CMU)
 ```
 pip install git+https://github.com/cnellington/SampleSpecificDAGs.git
 ```
-Then in your code use
+Then in your Python notebook/script use
 ```
 from notmad.notmad import NOTMAD
 ```
