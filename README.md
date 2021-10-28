@@ -5,7 +5,7 @@ Developed by Dr. Ben Lengerich (MIT) and Caleb Ellington (CMU)
 
 ## Install and Use NOTMAD
 ```
-pip install git+https://github.com/cnellington/SampleSpecificDAGs.git#egg=notmad
+pip install git+https://github.com/cnellington/SampleSpecificDAGs.git
 ```
 Then in your code use
 ```
