@@ -1,11 +1,8 @@
-from setuptools import setup
+import setuptools
 
-import os
-
-BASEPATH = os.path.dirname(os.path.abspath(__file__))
-
-setup(name='notmad',
-      py_modules=['notmad'],
+setuptools.setup(name='notmad',
+      packages=['notmad'],
+      version='0.0.0',
       install_requires=[
           'tensorflow>=2.4.0',
           'tensorflow-addons',
