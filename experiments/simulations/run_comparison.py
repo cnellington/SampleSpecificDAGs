@@ -9,13 +9,11 @@ import sklearn
 from sklearn.model_selection import train_test_split
 from sklearn.decomposition import PCA
 
-import dataloader
+from notmad.baselines import NOTEARS, ClusteredNOTEARS
+from notmad.notmad import NOTMAD
 from notmad.helpers import utils
 from notmad.helpers import graph_utils
-
-from notears import NOTEARS
-from clustered_notears import ClusteredNOTEARS
-from notmad.notmad import NOTMAD
+import dataloader
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 tf_dtype = tf.dtypes.float32
