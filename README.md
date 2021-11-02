@@ -1,7 +1,7 @@
 # Sample-specific Bayesian Networks
 A framework for estimating the structures and parameters of Bayesian networks (DAGs) at per-sample or per-patient resolution, formally dubbed NOTMAD (NO-TEARS Mixtures of Archetypal DAGs).
 
-Based on the preprint manuscript [NOTMAD: Estimating Bayesian Networks with Sample-Specific Structures and Parameters](https://arxiv.org/abs/2111.01104).
+Based on the manuscript [NOTMAD: Estimating Bayesian Networks with Sample-Specific Structures and Parameters](https://arxiv.org/abs/2111.01104).
 
 Implemented by Dr. Ben Lengerich (MIT) and Caleb Ellington (CMU)
 
