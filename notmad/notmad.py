@@ -1,4 +1,5 @@
 import numpy as np
+import copy
 from sklearn.model_selection import train_test_split
 from sklearn.decomposition import PCA
 import tensorflow as tf
@@ -343,6 +344,7 @@ class NOTMAD: # TODO: Only difference between low-rank and full-rank version sho
                      
     def fit(self, C, X, epochs, batch_size,
             es_patience=None, val_split=0.25, callbacks=[], verbose=1):
+        callbacks = copy.deepcopy(callbacks)
         if es_patience is not None:
             callbacks.append(tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=es_patience))
         if self.use_dynamic_alpha_rho:

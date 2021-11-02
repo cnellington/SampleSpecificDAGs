@@ -1,3 +1,4 @@
+import copy
 import numpy as np
 from sklearn.cluster import KMeans
 import tensorflow as tf
@@ -50,7 +51,7 @@ class NOTEARS:
     def __init__(self, loss_params, context_shape, W_shape,
                  learning_rate=1e-3,
                  tf_dtype=tf.dtypes.float32):
-        super(NOTEARS, self).__init__()
+#         super(NOTEARS, self).__init__()
         encoder_input_shape = (context_shape[1], 1)
         self.context = tf.keras.layers.Input(
             shape=encoder_input_shape, dtype=tf_dtype, name="C")
@@ -80,6 +81,7 @@ class NOTEARS:
                      metrics = self.metrics)
 
     def fit(self, C, X, epochs, batch_size, es_patience=None, val_split=0.25, callbacks=[], verbose=1):
+        callbacks = copy.deepcopy(callbacks)
         if es_patience is not None:
             callbacks.append(tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=es_patience))
         if self.use_dynamic_alpha_rho:
@@ -108,7 +110,7 @@ class ClusteredNOTEARS:
     def __init__(self, n_clusters, loss_params, context_shape, W_shape,
                  learning_rate=1e-3, clusterer=None, clusterer_fitted=False,
                  tf_dtype=tf.dtypes.float32):
-        super(ClusteredNOTEARS, self).__init__()
+#         super(ClusteredNOTEARS, self).__init__()
         if clusterer is None:
             self.clusterer = KMeans(n_clusters=n_clusters)
         else:
@@ -120,10 +122,9 @@ class ClusteredNOTEARS:
         if len(C.shape) > 2:
             C = C.squeeze()
         if not self.clusterer_fitted:
-            k = C.shape[1] // 2
-            self.clusterer.fit(C[:,:k]) # TODO: REMOVE CONTEXT SLICING FROM FIT/PREDICT AFTER NEURIPS
+            self.clusterer.fit(C)
             self.clusterer_fitted = True
-        train_labels = self.clusterer.predict(C[:,:k])  # TODO: HERE
+        train_labels = self.clusterer.predict(C)
         loop = list(set(train_labels))
         if verbose:
             loop = tqdm(loop, desc='Clustered NOTEARS Training')
@@ -141,8 +142,7 @@ class ClusteredNOTEARS:
         # Already projected to DAG space, nothing to do here.
         if len(C.shape) > 2:
             C = C.squeeze()
-        k = C.shape[1] // 2
-        test_labels  = self.clusterer.predict(C[:,:k])  # TODO: HERE
+        test_labels  = self.clusterer.predict(C)
         return np.array([self.notears_models[label].get_w() for label in test_labels])
     
     def get_ws(self, project_to_dag=False):

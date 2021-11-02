@@ -1,1 +1,3 @@
-python experiments/simulations/run_comparison.py
+cd experiments/simulations
+python run_comparison.py
+cd ../..
