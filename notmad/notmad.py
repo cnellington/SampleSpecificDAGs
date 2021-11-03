@@ -12,6 +12,10 @@ from notmad.helpers import graph_utils
 
 
 class NGAM(tf.keras.layers.Layer):
+    """
+    Neural Generalized Additive Model
+    One multi-layer perceptron per input dimension for an interpretable non-linear model
+    """
     def __init__(self, input_width, output_width, depth, width, activation='swish',
                 final_activation='linear', boolean_feats=None):
         super(NGAM, self).__init__()
@@ -44,6 +48,9 @@ class NGAM(tf.keras.layers.Layer):
     
 
 class DynamicAlphaRho(Callback):
+    """
+    Dual-step DAG optimization parameter update, required for NO-TEARS structure learning
+    """
     def __init__(self, C_train, base_predictor=None, tol=0.25):
         super(DynamicAlphaRho, self).__init__()
         self.C_train = C_train
@@ -72,6 +79,9 @@ class DynamicAlphaRho(Callback):
         self.h_old = my_dag_loss
 
 class ProjectToDAG(Callback):
+    """
+    Project low and rull-rank archetypes in NOTMAD to DAG
+    """
     def __init__(self, distance=0.1):
         super(ProjectToDAG, self).__init__()
         self.distance = distance
@@ -117,6 +127,9 @@ class ProjectToDAG(Callback):
 
 
 class UpdateCompatMat(Callback):
+    """
+    Binary compatibility matrix to enforce DAG-only archetype mixtures in NOTMAD
+    """
     def __init__(self):
         super(UpdateCompatMat, self).__init__()
 
@@ -137,6 +150,9 @@ class UpdateCompatMat(Callback):
 
             
 class BatchDot(tf.keras.layers.Layer):
+    """
+    Matrix multiplication over a batch
+    """
     def __init__(self):
         super(BatchDot, self).__init__()
 
@@ -147,6 +163,10 @@ class BatchDot(tf.keras.layers.Layer):
         return tf.keras.backend.batch_dot(A, B)
         
 class Explainer(tf.keras.layers.Layer):
+    """
+    NOTMAD dictionary of archetypes
+    Forward pass takes a weight vector and returns a weighted combination of archetypes
+    """
     def __init__(self, archetype_shape, tf_dtype, init_mat=None, init_archs=None,
                  freeze_archs=False, init_compat=None, freeze_compat=False,
                  use_compat=False, update_compat_by_grad=True):
@@ -215,6 +235,10 @@ class Explainer(tf.keras.layers.Layer):
 
 
 class NOTMAD: # TODO: Only difference between low-rank and full-rank version should be the Explainer.
+    """
+    NO-TEARS Optimized Mixtures of Archetypal DAGs
+    The sample-specific DAG estimation model
+    """
     def __init__(self, context_shape, data_shape, n_archetypes,
                  sample_specific_loss_params, archetype_loss_params,
                  n_encoder_layers=1, encoder_width=16,

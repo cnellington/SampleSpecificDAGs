@@ -13,6 +13,9 @@ from notmad.helpers.tf_utils import NOTEARS_loss, DAG_loss
 # Keras NOTEARS version which takes in context and returns a single population model.
 
 class DummyWeight(tf.keras.layers.Layer):
+    """
+    Placeholder for NOTEARS
+    """
     def __init__(self, W_shape):
         super(DummyWeight, self).__init__()
 
@@ -28,6 +31,9 @@ class DummyWeight(tf.keras.layers.Layer):
 
 # TODO: Sync this callback with the callback for CNOTEARS
 class DynamicAlphaRho(Callback):
+    """
+    Dual-step DAG optimization, required for NO-TEARS structure learning
+    """
     def __init__(self, C_train):
         super(DynamicAlphaRho, self).__init__()
         self.C_train = C_train
@@ -48,6 +54,9 @@ class DynamicAlphaRho(Callback):
 
         
 class NOTEARS:
+    """
+    Learn a DAG by minimizing NO-TEARS loss over a training set
+    """
     def __init__(self, loss_params, context_shape, W_shape,
                  learning_rate=1e-3,
                  tf_dtype=tf.dtypes.float32):
@@ -107,6 +116,10 @@ class NOTEARS:
 
 
 class ClusteredNOTEARS:
+    """
+    Learn several NO-TEARS optimized DAGs based on a clustering function
+    Clusters can be pre-defined or learned here using context data
+    """
     def __init__(self, n_clusters, loss_params, context_shape, W_shape,
                  learning_rate=1e-3, clusterer=None, clusterer_fitted=False,
                  tf_dtype=tf.dtypes.float32):
